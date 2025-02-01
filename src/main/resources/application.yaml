@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: JavaSpringBootdemo
+  datasource:
+    url: jdbc:mysql://localhost:3306/study
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+  mvc:
+    static-path-pattern: /static/**   #????????
+  # Spring Security ????
+  security:
+    filter:
+      order: -100 #Spring Security ??????
+    user:
+      name: 'admin'   #???????
+      password: '123456'   #??????
+      roles:    #???????
+        - admin
+        - user
