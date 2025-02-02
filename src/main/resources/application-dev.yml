@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: JavaSpringBootdemo
+  datasource:
+    url: jdbc:mysql://localhost:3306/getest
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+  mvc:
+    static-path-pattern: /static/**   #静态资源解析地址
+  # Spring Security 相关配置
+#  security:
+#    filter:
+#      order: -100 #Spring Security 过滤器优先级
+#    user:
+#      name: 'admin'   #默认登录用户名
+#      password: '123456'   #默认登录密码
+#      roles:    #默认用户的角色
+#        - admin
+#        - user
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: masonjj@foxmail.com # 发件人邮箱（QQ邮箱地址）
+    password: uzbrklcyphzzhacc # 授权码（非邮箱密码）
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  springdoc:
+    api-docs:
+      enabled: true
+#  jpa:
+#    #开启SQL语句执行日志信息
+#    show-sql: true
+#    hibernate:
+#      #配置为检查数据库表结构，没有时会自动创建
+#      ddl-auto: update
+  mybatis-plus:
+    configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

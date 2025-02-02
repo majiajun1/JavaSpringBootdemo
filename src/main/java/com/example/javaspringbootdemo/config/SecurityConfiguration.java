@@ -26,4 +26,19 @@ public class SecurityConfiguration {
 //                })
 //                .build();
 //    }
+
+     @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(auth -> auth
+                .anyRequest().permitAll() // 允许所有请求，无需登录
+            )
+
+            .csrf(csrf -> csrf.disable()) // 关闭 CSRF 保护
+            .formLogin(form -> form.disable()) // 关闭默认的登录界面
+            .httpBasic(httpBasic -> httpBasic.disable()); // 关闭 HTTP Basic 认证
+
+
+        return http.build();
+    }
 }

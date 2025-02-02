@@ -94,8 +94,45 @@
     <artifactId>lettuce-core</artifactId>
     <version>6.3.2.RELEASE</version>
 </dependency>
+        <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-mail</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+        <dependency>
+    <groupId>jakarta.validation</groupId>
+    <artifactId>jakarta.validation-api</artifactId>
+    <version>3.0.0</version>
+</dependency>
+        <dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    <version>2.1.0</version>
+</dependency>
+        <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
 
+<dependency>
+    <groupId>com.baomidou</groupId>
+    <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+    <version>3.5.5</version>
+</dependency>
 
+<dependency>
+    <groupId>com.baomidou</groupId>
+    <artifactId>mybatis-plus-generator</artifactId>
+    <version>3.5.3.1</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.velocity</groupId>
+    <artifactId>velocity-engine-core</artifactId>
+    <version>2.3</version>
+</dependency>
 
     </dependencies>
 
@@ -124,6 +161,51 @@
         </plugin>
 
         </plugins>
-    </build>
+        <resources>
+<!--排除配置文件-->
+    <resource>
+        <directory>src/main/resources</directory>
+        <!--先排除所有的配置文件-->
+        <excludes>
+            <!--使用通配符，当然可以定义多个exclude标签进行排除-->
+            <exclude>application*.yml</exclude>
+        </excludes>
+    </resource>
 
+    <!--根据激活条件引入打包所需的配置和文件-->
+    <resource>
+        <directory>src/main/resources</directory>
+        <!--引入所需环境的配置文件-->
+        <filtering>true</filtering>
+        <includes>
+            <include>application.yml</include>
+            <!--根据maven选择环境导入配置文件-->
+            <include>application-${environment}.yml</include>
+        </includes>
+    </resource>
+</resources>
+    </build>
+<!--分别设置开发，生产环境-->
+<profiles>
+    <!-- 开发环境 -->
+    <profile>
+        <id>dev</id>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
+        <properties>
+            <environment>dev</environment>
+        </properties>
+    </profile>
+    <!-- 生产环境 -->
+    <profile>
+        <id>prod</id>
+        <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation>
+        <properties>
+            <environment>prod</environment>
+        </properties>
+    </profile>
+</profiles>
 </project>
